@@ -1,3 +1,7 @@
 .poster-card {
-  height: 70%;
+  height: 60%;
+}
+
+.col-md {
+  padding-top: 100px;
 }

@@ -1,3 +1,16 @@
+body {
+  background: -webkit-linear-gradient(
+    45deg,
+    rgb(228, 142, 244) 8%,
+    rgb(86, 181, 184)
+  );
+  background: -moz-linear-gradient(
+    45deg,
+    rgb(228, 142, 244) 8%,
+    rgb(86, 181, 184)
+  );
+  background: linear-gradient(45deg, rgb(228, 142, 244) 8%, rgb(86, 181, 184));
+}
 .App {
   text-align: center;
 }

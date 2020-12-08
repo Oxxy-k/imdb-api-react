@@ -3,9 +3,10 @@ import React, { useState } from "react";
 const SearchBar = ({ onSubmit }) => {
   const [value, setValue] = useState("");
   return (
-    <div>
-      <label>
+    <div className="col-7 text-center form">
+      <label className="text-center">
         <input
+          className="form-control text-center input"
           type="text"
           value={value}
           onChange={(e) => setValue(e.target.value)}
@@ -13,7 +14,7 @@ const SearchBar = ({ onSubmit }) => {
         />
       </label>
       <input
-        className="btn btn-primary"
+        className="btn btn-primary btn-submit"
         type="submit"
         value="Submit"
         onClick={() => onSubmit(value)}

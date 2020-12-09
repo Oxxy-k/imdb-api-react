@@ -8,6 +8,7 @@ import BtnShowMore from "./components/btn-show-more";
 import GenreBar from "./components/genre-bar";
 
 function App() {
+  const [filterGenre, setFilterGenre] = useState([]);
   const [value, setValue] = useState([]);
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
@@ -16,31 +17,32 @@ function App() {
       .then((response) => response.json())
       .then((response) => {
         const addGenreResponse = response.Search.map((data) => {
-          return { ...data, Genre: addRandomGenre() };
+          return { ...data, Genre: addRandomGenre(), Choose: true };
         });
         setData([...data, ...addGenreResponse]);
       })
       .catch((err) => console.log(err));
   }, [value, page]);
 
-  const [booleanGenre, setBooleanGenre] = useState(
-    getUniqueGenre(data).map((Genre) => {
-      return { Genre, choose: true };
-    })
-  );
-
   const onChangeFilterGenre = (changeGenre) => {
-    setBooleanGenre({
-      ...booleanGenre,
-      Genre: changeGenre.filter,
-    });
-    console.log(
-      "🚀 ~ file: App.js ~ line 37 ~ onChangeFilterGenre ~ booleanGenre",
-      booleanGenre
-    );
+    if (changeGenre.filter) {
+      setFilterGenre([...filterGenre, changeGenre]);
+    }
+    if (!changeGenre.filter) {
+      const indexGenre = filterGenre.findIndex(
+        ({ Genre }) => Genre === changeGenre.Genre
+      );
+      if (indexGenre >= 0) {
+        const filter = [...filterGenre];
+        filter.splice(indexGenre, 1);
+        setFilterGenre(filter);
+      }
+    }
   };
+  console.log(filterGenre);
+
   return (
-  <div className="App">
+    <div className="App">
       <div className="container-fluid">
         <SearchBar onSubmit={setValue} />
         <div className="row genre-bar">
@@ -57,7 +59,13 @@ function App() {
       <div className="row">
         {!data.length
           ? null
-          : data.map((filmInfo) => <FilmTitle filmInfo={filmInfo} />)}
+          : data.map((filmInfo) =>
+              filterGenre.find(
+                ({ Genre }) => Genre === filmInfo.Genre
+              ) ? null : (
+                <FilmTitle filmInfo={filmInfo} />
+              )
+            )}
         {!data.length ? null : <BtnShowMore onCountPage={setPage} />}
       </div>
     </div>

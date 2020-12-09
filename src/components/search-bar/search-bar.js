@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const SearchBar = ({ onSubmit }) => {
   const [value, setValue] = useState("");
   return (
-    <div className="col-7 text-center form">
+    <div className="raw text-center form">
       <label className="text-center">
         <input
           className="form-control text-center input"

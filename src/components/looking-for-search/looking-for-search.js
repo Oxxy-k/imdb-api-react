@@ -11,7 +11,7 @@ const LookingForSearch = ({ errorMessage }) => {
       </h2>
       <img
         className="screen-picture"
-        src="http://bizness-master.com/wp-content/uploads/2016/08/monitor-1.png"
+        src="https://pngimage.net/wp-content/uploads/2018/06/flat-screen-tv-on-wall-png-2.png"
         alt="Screen"
       ></img>
     </div>

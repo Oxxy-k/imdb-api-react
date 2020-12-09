@@ -7,6 +7,7 @@ import { getUniqueGenre } from "./services/get-unique-genre";
 import BtnShowMore from "./components/btn-show-more";
 import GenreBar from "./components/genre-bar";
 import Spinner from "./components/spinner";
+import LookingForSearch from "./components/looking-for-search";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -67,15 +68,15 @@ function App() {
         </div>
       </div>
       <div className="row">
-        {!data.length
-          ? null
-          : data.map((filmInfo) =>
-              filterGenre.find(
-                ({ Genre }) => Genre === filmInfo.Genre
-              ) ? null : (
-                <FilmTitle key={filmInfo.imdbID} filmInfo={filmInfo} />
-              )
-            )}
+        {!data.length && !loading ? (
+          <LookingForSearch />
+        ) : (
+          data.map((filmInfo) =>
+            filterGenre.find(({ Genre }) => Genre === filmInfo.Genre) ? null : (
+              <FilmTitle key={filmInfo.imdbID} filmInfo={filmInfo} />
+            )
+          )
+        )}
         {!data.length ? null : <BtnShowMore onCountPage={setPage} />}
       </div>
     </div>

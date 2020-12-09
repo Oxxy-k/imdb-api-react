@@ -16,22 +16,24 @@ function App() {
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?s=${value}&apikey=31a916fa&page=${page}`)
-      .then((response) => response.json())
-      .then((response) => {
-        const addGenreResponse = response.Search.map((data) => {
-          return { ...data, Genre: addRandomGenre(), Choose: true };
-        });
-        setData([...data, ...addGenreResponse]);
-        setLoading(false);
-      })
-      .catch((err) => console.log(err));
+    if (value !== "") {
+      setLoading(true);
+      fetch(`http://www.omdbapi.com/?s=${value}&apikey=31a916fa&page=${page}`)
+        .then((response) => response.json())
+        .then((response) => {
+          const addGenreResponse = response.Search.map((data) => {
+            return { ...data, Genre: addRandomGenre(), Choose: true };
+          });
+          setData([...data, ...addGenreResponse]);
+          setLoading(false);
+        })
+        .catch((err) => console.log(err));
+    }
   }, [value, page]);
 
   const onSubmit = (valueSearch) => {
     setData([]);
     setPage(1);
-    setLoading(true);
     setValue(valueSearch);
   };
 

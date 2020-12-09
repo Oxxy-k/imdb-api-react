@@ -10,7 +10,7 @@ const SearchBar = ({ onSubmit }) => {
           type="text"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="Put your film"
+          placeholder="Enter movie title"
         />
       </label>
       <input

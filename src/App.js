@@ -30,6 +30,7 @@ function App() {
 
   const onSubmit = (valueSearch) => {
     setData([]);
+    setPage(1);
     setLoading(true);
     setValue(valueSearch);
   };

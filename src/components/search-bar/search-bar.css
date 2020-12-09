@@ -1,7 +1,6 @@
 .form {
   justify-content: center;
-  margin-top: 50px;
-  margin-left: 400px;
+  margin: 50px auto;
 }
 .input {
   width: 500px;

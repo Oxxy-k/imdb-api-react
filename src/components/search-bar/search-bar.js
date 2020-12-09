@@ -16,7 +16,7 @@ const SearchBar = ({ onSubmit }) => {
       <input
         className="btn btn-primary btn-submit"
         type="submit"
-        value="Submit"
+        value="Search"
         onClick={() => onSubmit(value)}
       />
     </div>

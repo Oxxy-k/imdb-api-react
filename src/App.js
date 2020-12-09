@@ -10,6 +10,7 @@ import Spinner from "./components/spinner";
 import LookingForSearch from "./components/looking-for-search";
 
 function App() {
+  const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [filterGenre, setFilterGenre] = useState([]);
   const [value, setValue] = useState(``);
@@ -20,14 +21,19 @@ function App() {
       setLoading(true);
       fetch(`http://www.omdbapi.com/?s=${value}&apikey=31a916fa&page=${page}`)
         .then((response) => response.json())
-        .then((response) => {
-          const addGenreResponse = response.Search.map((data) => {
-            return { ...data, Genre: addRandomGenre(), Choose: true };
-          });
-          setData([...data, ...addGenreResponse]);
-          setLoading(false);
-        })
-        .catch((err) => console.log(err));
+        .then((jsonResponse) => {
+          if (jsonResponse === "True") {
+            const addGenreResponse = jsonResponse.Search.map((data) => {
+              return { ...data, Genre: addRandomGenre(), Choose: true };
+            });
+            setData([...data, ...addGenreResponse]);
+            setLoading(false);
+          } else {
+            setErrorMessage(jsonResponse.Error);
+            setLoading(false);
+            setData([]);
+          }
+        });
     }
   }, [value, page]);
 
@@ -73,7 +79,7 @@ function App() {
       </div>
       <div className="row">
         {!data.length && !loading ? (
-          <LookingForSearch />
+          <LookingForSearch errorMessage={errorMessage} />
         ) : (
           data.map((filmInfo) =>
             filterGenre.find(({ Genre }) => Genre === filmInfo.Genre) ? null : (

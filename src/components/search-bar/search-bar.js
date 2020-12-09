@@ -17,7 +17,10 @@ const SearchBar = ({ onSubmit }) => {
         className="btn btn-primary btn-submit"
         type="submit"
         value="Search"
-        onClick={() => onSubmit(value)}
+        onClick={() => {
+          setValue("");
+          onSubmit(value);
+        }}
       />
     </div>
   );

@@ -78,7 +78,7 @@ function App() {
           )}
         </div>
       </div>
-      <div className="row">
+      <div className="row film-container">
         {!data.length && !loading ? (
           <LookingForSearch errorMessage={errorMessage} />
         ) : (

@@ -40,17 +40,19 @@ function App() {
     );
   };
   return (
-    <div className="App">
+  <div className="App">
       <div className="container-fluid">
         <SearchBar onSubmit={setValue} />
-        {!data.length
-          ? null
-          : getUniqueGenre(data).map((Genre) => (
-              <GenreBar
-                onChangeFilterGenre={onChangeFilterGenre}
-                Genre={Genre}
-              />
-            ))}
+        <div className="row genre-bar">
+          {!data.length
+            ? null
+            : getUniqueGenre(data).map((Genre) => (
+                <GenreBar
+                  onChangeFilterGenre={onChangeFilterGenre}
+                  Genre={Genre}
+                />
+              ))}
+        </div>
       </div>
       <div className="row">
         {!data.length

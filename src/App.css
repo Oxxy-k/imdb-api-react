@@ -15,6 +15,11 @@ body {
   text-align: center;
 }
 
+.film-container {
+  margin: auto;
+  max-width: 1200px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

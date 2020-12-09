@@ -22,7 +22,8 @@ function App() {
       fetch(`http://www.omdbapi.com/?s=${value}&apikey=31a916fa&page=${page}`)
         .then((response) => response.json())
         .then((jsonResponse) => {
-          if (jsonResponse === "True") {
+          console.log(jsonResponse);
+          if (jsonResponse.Response === "True") {
             const addGenreResponse = jsonResponse.Search.map((data) => {
               return { ...data, Genre: addRandomGenre(), Choose: true };
             });

@@ -6,7 +6,7 @@ const GenreBar = ({ Genre, onChangeFilterGenre }) => {
   return (
     <div className="col-md">
       <label className="form-check">
-        <input
+       <input
           className="form-check-input"
           type="checkbox"
           checked={chooseGenre.filter}

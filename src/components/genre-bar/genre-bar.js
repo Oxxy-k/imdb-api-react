@@ -1,12 +1,12 @@
 import "./genre-bar.css";
 import React, { useState } from "react";
 
-const GenreBar = ({ Genre, onChangeFilterGenre }) => {
-  const [chooseGenre, setChooseGenre] = useState({ Genre, filter: true });
+const GenreBar = ({ Genre, onChangeFilterGenre, filter }) => {
+  const [chooseGenre, setChooseGenre] = useState({ Genre, filter: filter });
   return (
     <div className="col-md">
       <label className="form-check">
-       <input
+        <input
           className="form-check-input"
           type="checkbox"
           checked={chooseGenre.filter}

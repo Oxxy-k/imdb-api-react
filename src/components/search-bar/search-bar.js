@@ -21,6 +21,7 @@ const SearchBar = ({ onSubmit }) => {
           setValue("");
           onSubmit(value);
         }}
+        disabled={!(value.length > 2)}
       />
     </div>
   );

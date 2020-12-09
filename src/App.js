@@ -59,6 +59,8 @@ function App() {
       }
     }
   };
+  console.log(data);
+  console.log(filterGenre);
 
   return (
     <div className="App">
@@ -73,6 +75,11 @@ function App() {
                 key={Genre}
                 onChangeFilterGenre={onChangeFilterGenre}
                 Genre={Genre}
+                filter={
+                  !filterGenre.find(
+                    (filterGenreObj) => filterGenreObj.Genre === Genre
+                  )
+                }
               />
             ))
           )}

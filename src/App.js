@@ -6,8 +6,10 @@ import { addRandomGenre } from "./services/add-random-genre";
 import { getUniqueGenre } from "./services/get-unique-genre";
 import BtnShowMore from "./components/btn-show-more";
 import GenreBar from "./components/genre-bar";
+import Spinner from "./components/spinner";
 
 function App() {
+  const [loading, setLoading] = useState(false);
   const [filterGenre, setFilterGenre] = useState([]);
   const [value, setValue] = useState(``);
   const [page, setPage] = useState(1);
@@ -20,9 +22,15 @@ function App() {
           return { ...data, Genre: addRandomGenre(), Choose: true };
         });
         setData([...data, ...addGenreResponse]);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   }, [value, page]);
+
+  const onSubmit = (valueSearch) => {
+    setLoading(true);
+    setValue(valueSearch);
+  };
 
   const onChangeFilterGenre = (changeGenre) => {
     if (changeGenre.filter) {
@@ -43,17 +51,19 @@ function App() {
   return (
     <div className="App">
       <div className="container-fluid">
-        <SearchBar onSubmit={setValue} />
+        <SearchBar onSubmit={onSubmit} />
         <div className="row genre-bar">
-          {!data.length
-            ? null
-            : getUniqueGenre(data).map((Genre) => (
-                <GenreBar
-                  key={Genre}
-                  onChangeFilterGenre={onChangeFilterGenre}
-                  Genre={Genre}
-                />
-              ))}
+          {loading ? (
+            <Spinner />
+          ) : !data.length ? null : (
+            getUniqueGenre(data).map((Genre) => (
+              <GenreBar
+                key={Genre}
+                onChangeFilterGenre={onChangeFilterGenre}
+                Genre={Genre}
+              />
+            ))
+          )}
         </div>
       </div>
       <div className="row">

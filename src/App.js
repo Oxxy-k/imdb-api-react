@@ -59,9 +59,7 @@ function App() {
       }
     }
   };
-  console.log(data);
-  console.log(filterGenre);
-
+ 
   return (
     <div className="App">
       <div className="container-fluid">

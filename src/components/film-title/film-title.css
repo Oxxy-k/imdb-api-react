@@ -3,5 +3,13 @@
 }
 
 .col-md {
-  padding-top: 25px;
+  margin-top: 25px;
+}
+
+.film-info {
+  font-weight: bold;
+}
+
+.film-title {
+  padding-top: 5px;
 }

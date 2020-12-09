@@ -39,7 +39,7 @@ function App() {
       }
     }
   };
-  console.log(filterGenre);
+
 
   return (
     <div className="App">

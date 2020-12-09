@@ -7,19 +7,21 @@ const GenreBar = ({ Genre, onChangeFilterGenre }) => {
     filter: true,
   });
   return (
-    <label className="form-check" key={Genre}>
-      <input
-        className="form-check-input"
-        type="checkbox"
-        id="materialChecked2"
-        checked={chooseGenre.filter}
-        onClick={() => {
-          setChooseGenre({ ...chooseGenre, filter: !chooseGenre.filter });
-          onChangeFilterGenre(chooseGenre);
-        }}
-      />
-      {Genre}
-    </label>
+    <div className="col-md">
+      <label className="form-check" key={Genre}>
+        <input
+          className="form-check-input"
+          type="checkbox"
+          id="materialChecked2"
+          checked={chooseGenre.filter}
+          onClick={() => {
+            setChooseGenre({ ...chooseGenre, filter: !chooseGenre.filter });
+            onChangeFilterGenre(chooseGenre);
+          }}
+        />
+        {Genre}
+      </label>
+    </div>
   );
 };
 

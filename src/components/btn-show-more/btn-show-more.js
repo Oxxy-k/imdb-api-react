@@ -2,7 +2,7 @@ import "./btn-show-more.css";
 import React, { useState } from "react";
 
 const BtnShowMore = ({ onCountPage }) => {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(2);
   return (
     <btn
       onClick={() => {

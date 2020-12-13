@@ -3,11 +3,11 @@
   margin: 50px auto;
 }
 .input {
-  width: 500px;
+  width: 50vh;
 }
 
 .btn-submit {
   margin-bottom: 5px;
-  width: 150px;
   margin-left: 20px;
+  width: 80px;
 }

@@ -10,26 +10,36 @@ import Spinner from "./components/spinner";
 import LookingForSearch from "./components/looking-for-search";
 
 function App() {
+  const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [filterGenre, setFilterGenre] = useState([]);
   const [value, setValue] = useState(``);
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?s=${value}&apikey=31a916fa&page=${page}`)
-      .then((response) => response.json())
-      .then((response) => {
-        const addGenreResponse = response.Search.map((data) => {
-          return { ...data, Genre: addRandomGenre(), Choose: true };
+    if (value !== "") {
+      setLoading(true);
+      fetch(`http://www.omdbapi.com/?s=${value}&apikey=31a916fa&page=${page}`)
+        .then((response) => response.json())
+        .then((jsonResponse) => {
+            if (jsonResponse.Response === "True") {
+            const addGenreResponse = jsonResponse.Search.map((data) => {
+              return { ...data, Genre: addRandomGenre(), Choose: true };
+            });
+            setData([...data, ...addGenreResponse]);
+            setLoading(false);
+          } else {
+            setErrorMessage(jsonResponse.Error);
+            setLoading(false);
+            setData([]);
+          }
         });
-        setData([...data, ...addGenreResponse]);
-        setLoading(false);
-      })
-      .catch((err) => console.log(err));
+    }
   }, [value, page]);
 
   const onSubmit = (valueSearch) => {
-    setLoading(true);
+    setData([]);
+    setPage(1);
     setValue(valueSearch);
   };
 
@@ -48,7 +58,7 @@ function App() {
       }
     }
   };
-
+ 
   return (
     <div className="App">
       <div className="container-fluid">
@@ -62,14 +72,19 @@ function App() {
                 key={Genre}
                 onChangeFilterGenre={onChangeFilterGenre}
                 Genre={Genre}
+                filter={
+                  !filterGenre.find(
+                    (filterGenreObj) => filterGenreObj.Genre === Genre
+                  )
+                }
               />
             ))
           )}
         </div>
       </div>
-      <div className="row">
+      <div className="row film-container">
         {!data.length && !loading ? (
-          <LookingForSearch />
+          <LookingForSearch errorMessage={errorMessage} />
         ) : (
           data.map((filmInfo) =>
             filterGenre.find(({ Genre }) => Genre === filmInfo.Genre) ? null : (

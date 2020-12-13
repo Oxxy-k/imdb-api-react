@@ -3,21 +3,25 @@ import React, { useState } from "react";
 const SearchBar = ({ onSubmit }) => {
   const [value, setValue] = useState("");
   return (
-    <div className="col-7 text-center form">
+    <div className="raw text-center form">
       <label className="text-center">
         <input
           className="form-control text-center input"
           type="text"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="Put your film"
+          placeholder="Enter movie title"
         />
       </label>
       <input
         className="btn btn-primary btn-submit"
         type="submit"
         value="Search"
-        onClick={() => onSubmit(value)}
+        onClick={() => {
+          setValue("");
+          onSubmit(value);
+        }}
+        disabled={!(value.length > 2)}
       />
     </div>
   );

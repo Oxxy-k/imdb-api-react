@@ -5,6 +5,7 @@ const FilmTitle = ({ filmInfo }) => {
   const { Genre, Poster, Year, Type, Title } = filmInfo;
   return (
     <div className="col-sm-4 text-center">
+      <div>New Branch</div>
       <img src={Poster} alt="Poster" className="poster-card"></img>
       <div className="film-info">
         <div className="film-title">{Title}</div>
